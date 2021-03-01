@@ -19,6 +19,9 @@ function starting(){
 
         // build buble chart
         buildBubble(sampleNames[0]);
+
+        // display metadata
+        displayMeta(sampleNames[0]);
     })
 }
 starting();
@@ -83,5 +86,25 @@ function buildBubble(sample){
         }
         Plotly.newPlot('bubble', bubbleData, bubbleLayout)
 
+    })
+}
+
+// display metadata
+function displayMeta(sample){
+    // get data
+    d3.json("../../data/samples.json").then((data)=>{
+        let allSampleMeta = data.metadata;
+
+        // filter data based on sample id in drop-down
+        sampleMetaArray = allSampleMeta.filter(item => item.id == sample)
+        sampleMeta = sampleMetaArray[0]
+
+        // select location to add metadata
+        let demo = d3.select("#sample-metadata")
+
+        // loop through each key in the metadata & display values
+        Object.entries(sampleMeta).forEach(([key, value]) => {
+            demo.append("h5").text(`${key}: ${value}`)
+        });
     })
 }
