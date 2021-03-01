@@ -52,7 +52,8 @@ function buildBar(sample){
           ];
 
         let barLayout = {
-
+            title: 'Top 10 OTU',
+            margin: { t: 50, l: 75 }
         }
         Plotly.newPlot('bar', barData, barLayout)
     })
@@ -82,7 +83,7 @@ function buildBubble(sample){
           ];
 
         let bubbleLayout = {
-
+            xaxis: {title: 'OTU ID'}
         }
         Plotly.newPlot('bubble', bubbleData, bubbleLayout)
 
@@ -102,9 +103,20 @@ function displayMeta(sample){
         // select location to add metadata
         let demo = d3.select("#sample-metadata")
 
+        // clear existing metadata
+        demo.html("")
+
         // loop through each key in the metadata & display values
         Object.entries(sampleMeta).forEach(([key, value]) => {
             demo.append("h5").text(`${key}: ${value}`)
         });
     })
+}
+
+// update charts & metadata on change of drop-down
+
+function optionChanged(sample){
+    buildBar(sample);
+    buildBubble(sample);
+    displayMeta(sample);
 }
