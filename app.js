@@ -2,7 +2,7 @@
 function starting(){
     let subjectID = d3.select("#selDataset");
     
-    d3.json("../../data/samples.json").then((data)=>{
+    d3.json("samples.json").then((data)=>{
         let sampleNames = data.names;
 
         sampleNames.forEach(sampleID => {
@@ -30,7 +30,7 @@ starting();
 // create horizontal bar chart
 function buildBar(sample){
     // get data
-    d3.json("../../data/samples.json").then((data)=>{
+    d3.json("samples.json").then((data)=>{
         let allSampleData = data.samples;
 
         // filter data based on sample id in drop-down
@@ -62,7 +62,7 @@ function buildBar(sample){
 // create bubble chart
 function buildBubble(sample){
     // get data
-    d3.json("../../data/samples.json").then((data)=>{
+    d3.json("samples.json").then((data)=>{
         let allSampleData = data.samples;
 
         // filter data based on sample id in drop-down
@@ -93,7 +93,7 @@ function buildBubble(sample){
 // display metadata
 function displayMeta(sample){
     // get data
-    d3.json("../../data/samples.json").then((data)=>{
+    d3.json("samples.json").then((data)=>{
         let allSampleMeta = data.metadata;
 
         // filter data based on sample id in drop-down
